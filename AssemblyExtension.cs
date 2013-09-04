@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.IO;
-namespace MannusWallpaper
+namespace MannusWallPaper
 {
     public static class AssemblyExtension
     {

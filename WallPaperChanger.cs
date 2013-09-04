@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Timers;
 using FlickrNet;
 
-namespace MannusWallpaper
+namespace MannusWallPaper
 {
     public class WallPaperChanger
     {
@@ -31,7 +31,7 @@ namespace MannusWallpaper
 
         internal void StartFlickrModus()
         {
-            int minutes = int.Parse(ConfigurationManager.AppSettings["changetimeinminutes"]);
+            int minutes = MannusWallPaperConfiguration.GetConfig().FlickrChangeTime;
             int seconds = 60;
             int second = 1000;
             timer.Interval = minutes * seconds * second;

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using MannusWallpaper;
+using MannusWallPaper;
 
 namespace WallpaperChanger
 {

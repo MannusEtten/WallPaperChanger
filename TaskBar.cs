@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace MannusWallpaper
+namespace MannusWallPaper
 {
     internal static class TaskBar
     {
