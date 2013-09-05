@@ -13,21 +13,18 @@ namespace WallpaperChanger
         private IContainer components;
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private ToolStripMenuItem basketBalNieuwsToolStripMenuItem;
         private ToolStripMenuItem afsluitenToolStripMenuItem;
         private WallPaperChanger changer = new WallPaperChanger();
         private string _shortCutFileName;
         private ToolStripMenuItem toolStripMenuItem3;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
-        private TaskBarManager _taskBarManager;
+        private DesktopManager _desktopManager;
 
         public Form1()
         {
             InitializeComponent();
-            _taskBarManager = new TaskBarManager();
+            _desktopManager = new DesktopManager();
             _taskBarIsShown = true;
             ToggleTaskBar();
             AddMenuItems();
@@ -43,12 +40,51 @@ namespace WallpaperChanger
                 menuItem.Text = item.Description;
                 menuItem.Tag = item.Key;
                 contextMenuStrip1.Items.Insert(0, menuItem);
+                menuItem.Click += menuItem_Click;
             }
             ToolStripMenuItem flickrMenuItem = new ToolStripMenuItem();
             flickrMenuItem.Text = "Flick'r";
             flickrMenuItem.Tag = "flickr";
             flickrMenuItem.Checked = true;
+            flickrMenuItem.Click += menuItem_Click;
             contextMenuStrip1.Items.Insert(MannusWallPaperConfiguration.GetConfig().WallPapers.Count, flickrMenuItem);
+        }
+
+        void menuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var menuitem in contextMenuStrip1.Items)
+            {
+                if(menuitem.GetType() == typeof(ToolStripMenuItem))
+                {
+                    var item = menuitem as ToolStripMenuItem;
+                    item.Checked = false;
+                }
+            }
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            var key = menuItem.Tag as string;
+            var wallPaperConfiguration = MannusWallPaperConfiguration.GetConfig().WallPapers[key];
+            if (string.Equals(key, "flickr", StringComparison.InvariantCultureIgnoreCase))
+            {
+                _desktopManager.ShowDesktop();
+                TaskBar.Show();
+            }
+            else
+            {
+                _desktopManager.SetDesktopImage(wallPaperConfiguration.Path);
+                _desktopManager.SetDesktopColor(wallPaperConfiguration.DesktopBackColor);
+                var showDesktop = bool.Parse(wallPaperConfiguration.EmptyDesktop);
+                if (showDesktop)
+                {
+                    TaskBar.Show();
+                    _desktopManager.ShowDesktop();
+                }
+                else
+                {
+                    TaskBar.Hide();
+                    _desktopManager.HideDesktop();
+                }
+            }
+            menuItem.Checked = true;
         }
 
         protected override void Dispose(bool disposing)
@@ -75,13 +111,10 @@ namespace WallpaperChanger
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.basketBalNieuwsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.afsluitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.afsluitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,65 +129,37 @@ namespace WallpaperChanger
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.basketBalNieuwsToolStripMenuItem,
             this.toolStripSeparator1,
             this.toolStripMenuItem3,
             this.toolStripSeparator2,
             this.afsluitenToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 82);
             this.contextMenuStrip1.Text = "Hoofdmenu";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Checked = true;
-            this.toolStripMenuItem1.CheckOnClick = true;
-            this.toolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
-            this.toolStripMenuItem1.Text = "Flick\'r";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.CheckOnClick = true;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(163, 22);
-            this.toolStripMenuItem2.Text = "Esri Nederland";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // basketBalNieuwsToolStripMenuItem
-            // 
-            this.basketBalNieuwsToolStripMenuItem.Name = "basketBalNieuwsToolStripMenuItem";
-            this.basketBalNieuwsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.basketBalNieuwsToolStripMenuItem.Text = "BasketBalNieuws";
-            this.basketBalNieuwsToolStripMenuItem.Click += new System.EventHandler(this.basketBalNieuwsToolStripMenuItem_Click);
-            // 
-            // afsluitenToolStripMenuItem
-            // 
-            this.afsluitenToolStripMenuItem.Name = "afsluitenToolStripMenuItem";
-            this.afsluitenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.afsluitenToolStripMenuItem.Text = "Afsluiten";
-            this.afsluitenToolStripMenuItem.Click += new System.EventHandler(this.afsluitenToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(163, 22);
-            this.toolStripMenuItem3.Text = "About";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Text = "About";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // afsluitenToolStripMenuItem
+            // 
+            this.afsluitenToolStripMenuItem.Name = "afsluitenToolStripMenuItem";
+            this.afsluitenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.afsluitenToolStripMenuItem.Text = "Afsluiten";
+            this.afsluitenToolStripMenuItem.Click += new System.EventHandler(this.afsluitenToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -183,33 +188,6 @@ namespace WallpaperChanger
             Application.Run(new Form1());
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            toolStripMenuItem2.Checked = false;
-            basketBalNieuwsToolStripMenuItem.Checked = false;
-            _taskBarIsShown = true;
-            ToggleTaskBar();
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            toolStripMenuItem1.Checked = false;
-            basketBalNieuwsToolStripMenuItem.Checked = false;
-            _taskBarIsShown = false;
-            ToggleTaskBar();
-            changer.SetEsriNederland();
-        }
-
-        private void basketBalNieuwsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            toolStripMenuItem1.Checked = false;
-            toolStripMenuItem2.Checked = false;
-            basketBalNieuwsToolStripMenuItem.Checked = true;
-            changer.SetBasketBalNieuws();
-            _taskBarIsShown = true;
-            ToggleTaskBar();
-        }
-
         private void afsluitenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -225,12 +203,10 @@ namespace WallpaperChanger
         {
             if (_taskBarIsShown)
             {
-                _taskBarManager.ShowTaskBar();
                 changer.StartFlickrModus();
             }
             else
             {
-                _taskBarManager.HideTaskBar();
                 AddShortCutToDesktop();
                 changer.SetEsriNederland();
                 CheckShortCut();
@@ -247,9 +223,6 @@ namespace WallpaperChanger
             else
             {
                 _taskBarIsShown = true;
-                toolStripMenuItem2.Checked = false;
-                basketBalNieuwsToolStripMenuItem.Checked = false;
-                toolStripMenuItem1.Checked = true;
                 ToggleTaskBar();
             }
         }

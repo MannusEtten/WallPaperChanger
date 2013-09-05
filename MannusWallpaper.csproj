@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Configuration.cs" />
     <Compile Include="Desktop.cs" />
+    <Compile Include="DesktopManager.cs" />
     <Compile Include="MannusWallpaper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,7 +139,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskBar.cs" />
-    <Compile Include="TaskBarManager.cs" />
     <Compile Include="WallPaperChanger.cs" />
     <Compile Include="WinAPI.cs" />
     <Content Include="basketbalnieuws.jpg">

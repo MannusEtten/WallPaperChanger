@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace MannusWallPaper
 {
-    internal class TaskBarManager
+    internal class DesktopManager
     {
         private Desktop _desktop;
 
-        public TaskBarManager()
+        public DesktopManager()
         {
             _desktop = new Desktop();
         }
-
-        public void ShowTaskBar()
+        
+        public void ShowDesktop()
         {
-            TaskBar.Show();
             _desktop.ShowDesktop(true);
         }
-
-        public void HideTaskBar()
+        
+        public void HideDesktop()
         {
-            TaskBar.Hide();
             _desktop.ShowDesktop(false);
+        }
+        
+        public void SetDesktopImage(string path)
+        {
+        }
+
+        internal void SetDesktopColor(string color)
+        {   
         }
     }
 }
