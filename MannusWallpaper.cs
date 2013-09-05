@@ -17,18 +17,38 @@ namespace WallpaperChanger
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem basketBalNieuwsToolStripMenuItem;
         private ToolStripMenuItem afsluitenToolStripMenuItem;
-        private Desktop _desktop;
         private WallPaperChanger changer = new WallPaperChanger();
         private string _shortCutFileName;
+        private ToolStripMenuItem toolStripMenuItem3;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
+        private TaskBarManager _taskBarManager;
 
         public Form1()
         {
             InitializeComponent();
+            _taskBarManager = new TaskBarManager();
             _taskBarIsShown = true;
-            _desktop = new Desktop();
             ToggleTaskBar();
+            AddMenuItems();
             string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             _shortCutFileName = Path.Combine(deskDir, "BasketBalNieuws.url");
+        }
+
+        private void AddMenuItems()
+        {
+            foreach (WallPaperElement item in MannusWallPaperConfiguration.GetConfig().WallPapers)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                menuItem.Text = item.Description;
+                menuItem.Tag = item.Key;
+                contextMenuStrip1.Items.Insert(0, menuItem);
+            }
+            ToolStripMenuItem flickrMenuItem = new ToolStripMenuItem();
+            flickrMenuItem.Text = "Flick'r";
+            flickrMenuItem.Tag = "flickr";
+            flickrMenuItem.Checked = true;
+            contextMenuStrip1.Items.Insert(MannusWallPaperConfiguration.GetConfig().WallPapers.Count, flickrMenuItem);
         }
 
         protected override void Dispose(bool disposing)
@@ -59,6 +79,9 @@ namespace WallpaperChanger
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.basketBalNieuwsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afsluitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,9 +99,12 @@ namespace WallpaperChanger
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.basketBalNieuwsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem3,
+            this.toolStripSeparator2,
             this.afsluitenToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 148);
             this.contextMenuStrip1.Text = "Hoofdmenu";
             // 
             // toolStripMenuItem1
@@ -112,6 +138,23 @@ namespace WallpaperChanger
             this.afsluitenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.afsluitenToolStripMenuItem.Text = "Afsluiten";
             this.afsluitenToolStripMenuItem.Click += new System.EventHandler(this.afsluitenToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItem3.Text = "About";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(160, 6);
             // 
             // Form1
             // 
@@ -182,14 +225,12 @@ namespace WallpaperChanger
         {
             if (_taskBarIsShown)
             {
-                TaskBar.Show();
-                _desktop.ShowDesktop(true);
+                _taskBarManager.ShowTaskBar();
                 changer.StartFlickrModus();
             }
             else
             {
-                TaskBar.Hide();
-                _desktop.ShowDesktop(false);
+                _taskBarManager.HideTaskBar();
                 AddShortCutToDesktop();
                 changer.SetEsriNederland();
                 CheckShortCut();
@@ -221,6 +262,12 @@ namespace WallpaperChanger
                 writer.WriteLine("URL=www.basketbalnieuws.nl");
                 writer.Flush();
             }
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
         }
     }
 }
