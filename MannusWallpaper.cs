@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -9,27 +10,28 @@ namespace WallpaperChanger
 {
     public class Form1 : System.Windows.Forms.Form
     {
-        private bool _taskBarIsShown;
         private IContainer components;
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem afsluitenToolStripMenuItem;
-        private WallPaperChanger changer = new WallPaperChanger();
-        private string _shortCutFileName;
+        private FlickrManager changer = new FlickrManager();
         private ToolStripMenuItem toolStripMenuItem3;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private DesktopManager _desktopManager;
+        private DesktopHidingChecker _desktopHidingChecker;
 
         public Form1()
         {
             InitializeComponent();
             _desktopManager = new DesktopManager();
-            _taskBarIsShown = true;
-            ToggleTaskBar();
+            _desktopHidingChecker = new DesktopHidingChecker();
             AddMenuItems();
-            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            _shortCutFileName = Path.Combine(deskDir, "BasketBalNieuws.url");
+            var numberOfMenuItems = contextMenuStrip1.Items.Count;
+            var menuItem = contextMenuStrip1.Items[numberOfMenuItems - 5];
+            var key = menuItem.Tag as string;
+            var wallPaperConfiguration = MannusWallPaperConfiguration.GetConfig().WallPapers[key];
+            SetDesktop(key, wallPaperConfiguration);
         }
 
         private void AddMenuItems()
@@ -42,12 +44,15 @@ namespace WallpaperChanger
                 contextMenuStrip1.Items.Insert(0, menuItem);
                 menuItem.Click += menuItem_Click;
             }
-            ToolStripMenuItem flickrMenuItem = new ToolStripMenuItem();
-            flickrMenuItem.Text = "Flick'r";
-            flickrMenuItem.Tag = "flickr";
-            flickrMenuItem.Checked = true;
-            flickrMenuItem.Click += menuItem_Click;
-            contextMenuStrip1.Items.Insert(MannusWallPaperConfiguration.GetConfig().WallPapers.Count, flickrMenuItem);
+            if (MannusWallPaperConfiguration.GetConfig().UseFlickr)
+            {
+                ToolStripMenuItem flickrMenuItem = new ToolStripMenuItem();
+                flickrMenuItem.Text = "Flick'r";
+                flickrMenuItem.Tag = "flickr";
+                flickrMenuItem.Checked = true;
+                flickrMenuItem.Click += menuItem_Click;
+                contextMenuStrip1.Items.Insert(MannusWallPaperConfiguration.GetConfig().WallPapers.Count, flickrMenuItem);
+            }
         }
 
         void menuItem_Click(object sender, EventArgs e)
@@ -63,17 +68,26 @@ namespace WallpaperChanger
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             var key = menuItem.Tag as string;
             var wallPaperConfiguration = MannusWallPaperConfiguration.GetConfig().WallPapers[key];
+            SetDesktop(key, wallPaperConfiguration);
+            menuItem.Checked = true;
+        }
+
+        private void SetDesktop(string key, WallPaperElement wallPaperConfiguration)
+        {
             if (string.Equals(key, "flickr", StringComparison.InvariantCultureIgnoreCase))
             {
                 _desktopManager.ShowDesktop();
                 TaskBar.Show();
+                changer.StartFlickrModus();
             }
             else
             {
+                changer.StopFlickrModus();
                 _desktopManager.SetDesktopImage(wallPaperConfiguration.Path);
-                _desktopManager.SetDesktopColor(wallPaperConfiguration.DesktopBackColor);
+                Color color = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(wallPaperConfiguration.DesktopBackColor);
+                _desktopManager.SetDesktopColor(color);
                 var showDesktop = bool.Parse(wallPaperConfiguration.EmptyDesktop);
-                if (showDesktop)
+                if (!showDesktop)
                 {
                     TaskBar.Show();
                     _desktopManager.ShowDesktop();
@@ -82,9 +96,10 @@ namespace WallpaperChanger
                 {
                     TaskBar.Hide();
                     _desktopManager.HideDesktop();
+                    _desktopHidingChecker.CreateCheckFile();
+                    _desktopHidingChecker.CheckIfDesktopMustBeShownAgain();
                 }
             }
-            menuItem.Checked = true;
         }
 
         protected override void Dispose(bool disposing)
@@ -191,50 +206,6 @@ namespace WallpaperChanger
         private void afsluitenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _taskBarIsShown = true;
-            ToggleTaskBar();
-        }
-
-        private void ToggleTaskBar()
-        {
-            if (_taskBarIsShown)
-            {
-                changer.StartFlickrModus();
-            }
-            else
-            {
-                AddShortCutToDesktop();
-                changer.SetEsriNederland();
-                CheckShortCut();
-            }
-        }
-
-        private void CheckShortCut()
-        {
-            if (File.Exists(_shortCutFileName))
-            {
-                Thread.Sleep(5000);
-                CheckShortCut();
-            }
-            else
-            {
-                _taskBarIsShown = true;
-                ToggleTaskBar();
-            }
-        }
-
-        private void AddShortCutToDesktop()
-        {
-            using (StreamWriter writer = new StreamWriter(_shortCutFileName))
-            {
-                writer.WriteLine("[InternetShortcut]");
-                writer.WriteLine("URL=www.basketbalnieuws.nl");
-                writer.Flush();
-            }
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)

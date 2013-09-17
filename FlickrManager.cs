@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -9,29 +11,24 @@ using FlickrNet;
 
 namespace MannusWallPaper
 {
-    public class WallPaperChanger
+    public class FlickrManager
     {
-        public const int SPI_SETDESKWALLPAPER = 20;
-        public const int SPIF_SENDCHANGE = 0x01 | 0x02;
         private Timer timer = new Timer();
+        private DesktopManager _desktopManager;
 
-        private void SetWallPaper(String fileName)
+        public FlickrManager()
         {
-            int nResult = WinAPI.SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, fileName, SPIF_SENDCHANGE);
+            _desktopManager = new DesktopManager();
         }
-
-        internal void SetEsriNederland()
+        internal void StopFlickrModus()
         {
             timer.Enabled = false;
             timer.Stop();
-            string picturename = ConfigurationManager.AppSettings["esrinlwallpaper"];
-            string picturePath = Assembly.GetExecutingAssembly().FindFileNextToAssembly(picturename);
-            SetWallPaper(picturePath);
         }
 
         internal void StartFlickrModus()
         {
-            int minutes = MannusWallPaperConfiguration.GetConfig().FlickrChangeTime;
+            int minutes = FlickrConfiguration.GetConfig().FlickrChangeTime;
             int seconds = 60;
             int second = 1000;
             timer.Interval = minutes * seconds * second;
@@ -52,7 +49,10 @@ namespace MannusWallPaper
             if (!string.IsNullOrEmpty(fileName))
             {
                 string fileLocation = DownloadFile(fileName);
-                SetWallPaper(fileLocation);
+                // TODO naar MannusLibrary verplaatsen
+                Color color = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString("White");
+                _desktopManager.SetDesktopColor(color);
+                _desktopManager.SetDesktopImage(fileLocation);
             }
         }
 
@@ -67,7 +67,7 @@ namespace MannusWallPaper
             return newFileName;
         }
 
-        public string GetRandomPhoto()
+        private string GetRandomPhoto()
         {
             List<Photoset> set = new FlickrGalleries.Sets().GetPhotoSets();
             List<Photo> setphotos = new List<Photo>();
@@ -83,15 +83,6 @@ namespace MannusWallPaper
                 return setphotos[r2].LargeUrl;
             }
             return null;
-        }
-
-        internal void SetBasketBalNieuws()
-        {
-            timer.Enabled = false;
-            timer.Stop();
-            string picturename = ConfigurationManager.AppSettings["basketbalnieuwswallpaper"];
-            string picturePath = Assembly.GetExecutingAssembly().FindFileNextToAssembly(picturename);
-            SetWallPaper(picturePath);
         }
     }
 }

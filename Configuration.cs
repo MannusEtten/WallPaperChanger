@@ -14,11 +14,11 @@ namespace MannusWallPaper
             return ConfigurationManager.GetSection("MannusWallPaper") as MannusWallPaperConfiguration;
         }
 
-        public int FlickrChangeTime
+        public bool UseFlickr
         {
             get
             {
-                return int.Parse(ConfigurationManager.AppSettings["flickrchangetimeinminutes"]);
+                return bool.Parse(ConfigurationManager.AppSettings["useflickrwallpaper"]);
             }
         }
 
@@ -29,7 +29,7 @@ namespace MannusWallPaper
         }
     }
 
-    public class WallPaperElement : ConfigurationElementBase
+    public sealed class WallPaperElement : ConfigurationElementBase
     {
         [ConfigurationProperty("path", IsRequired = true)]
         public string Path
@@ -58,6 +58,42 @@ namespace MannusWallPaper
         public override string ElementName
         {
             get { return "wallpaper"; }
+        }
+    }
+
+    public sealed class FlickrConfiguration : ConfigurationSection
+    {
+        public static FlickrConfiguration GetConfig()
+        {
+            return ConfigurationManager.GetSection("Flickr") as FlickrConfiguration;
+        }
+
+        [ConfigurationProperty("flickrsettings")]
+        public GenericConfigurationElementCollection<FlickrSettingElement> FlickrSettings
+        {
+            get { return (GenericConfigurationElementCollection<FlickrSettingElement>)this["flickrsettings"]; }
+        }
+
+        public int FlickrChangeTime
+        {
+            get
+            {
+                return int.Parse(FlickrSettings["changetimeinminutes"].Value);
+            }
+        }
+    }
+
+    public sealed class FlickrSettingElement : ConfigurationElementBase
+    {
+        [ConfigurationProperty("value", IsRequired = true)]
+        public string Value
+        {
+            get { return this["value"] as string; }
+        }
+
+        public override string ElementName
+        {
+            get { return "flickrsetting"; }
         }
     }
 }
