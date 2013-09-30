@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="TaskBar.cs" />
     <Compile Include="FlickrManager.cs" />
+    <Compile Include="WaterMarker.cs" />
     <Compile Include="WinAPI.cs" />
     <Content Include="basketbalnieuws.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

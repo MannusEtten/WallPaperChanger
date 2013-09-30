@@ -27,6 +27,26 @@ namespace MannusWallPaper
         {
             get { return (GenericConfigurationElementCollection<WallPaperElement>)this["wallpapers"]; }
         }
+
+        [ConfigurationProperty("watermarkfilters")]
+        public GenericConfigurationElementCollection<WaterMarkFilter> WaterMarkFilters
+        {
+            get { return (GenericConfigurationElementCollection<WaterMarkFilter>)this["watermarkfilters"]; }
+        }
+    }
+
+    public sealed class WaterMarkFilter : ConfigurationElementBase
+    {
+        [ConfigurationProperty("prefix", IsRequired = true)]
+        public string Prefix
+        {
+            get { return this["prefix"] as string; }
+        }
+
+        public override string ElementName
+        {
+            get { return "filter"; }
+        }
     }
 
     public sealed class WallPaperElement : ConfigurationElementBase

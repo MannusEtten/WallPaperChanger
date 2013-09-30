@@ -45,10 +45,12 @@ namespace MannusWallPaper
 
         private void SetRandomWallPaper()
         {
-            string fileName = GetRandomPhoto();
-            if (!string.IsNullOrEmpty(fileName))
+            var photo = GetRandomPhoto();
+            if (photo != null)
             {
-                string fileLocation = DownloadFile(fileName);
+                string fileLocation = DownloadFile(photo.LargeUrl);
+                WaterMarker waterMarker = new WaterMarker();
+                waterMarker.AddWaterMark(fileLocation, photo.Title);
                 // TODO naar MannusLibrary verplaatsen
                 Color color = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString("White");
                 _desktopManager.SetDesktopColor(color);
@@ -67,20 +69,18 @@ namespace MannusWallPaper
             return newFileName;
         }
 
-        private string GetRandomPhoto()
+        private Photo GetRandomPhoto()
         {
             List<Photoset> set = new FlickrGalleries.Sets().GetPhotoSets();
-            List<Photo> setphotos = new List<Photo>();
-            List<PhotoInfo> photos = new List<PhotoInfo>();
             Random random = new Random();
             if (set != null)
             {
                 // nummer set
                 int r1 = random.Next(0, set.Count - 1);
-                setphotos = new FlickrGalleries.Photos().GetPhotosBySet(set[r1].PhotosetId, string.Empty);
+                var setphotos = new FlickrGalleries.Photos().GetPhotosBySet(set[r1].PhotosetId, string.Empty);
                 // nummer foto
                 int r2 = random.Next(0, setphotos.Count - 1);
-                return setphotos[r2].LargeUrl;
+                return setphotos[r2];
             }
             return null;
         }
