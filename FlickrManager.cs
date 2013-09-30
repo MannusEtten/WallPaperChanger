@@ -8,6 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Timers;
 using FlickrNet;
+using Mannus.Library.Logging;
 
 namespace MannusWallPaper
 {
@@ -15,9 +16,11 @@ namespace MannusWallPaper
     {
         private Timer timer = new Timer();
         private DesktopManager _desktopManager;
+        private ILogger _logger;
 
         public FlickrManager()
         {
+            _logger = Logger.GetLogger();
             _desktopManager = new DesktopManager();
         }
         internal void StopFlickrModus()
@@ -48,6 +51,7 @@ namespace MannusWallPaper
             var photo = GetRandomPhoto();
             if (photo != null)
             {
+                _logger.LogDebug(photo.LargeUrl);
                 string fileLocation = DownloadFile(photo.LargeUrl);
                 WaterMarker waterMarker = new WaterMarker();
                 waterMarker.AddWaterMark(fileLocation, photo.Title);

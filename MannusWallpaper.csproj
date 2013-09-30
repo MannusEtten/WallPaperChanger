@@ -149,6 +149,9 @@
     <Content Include="esrinl.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Log4NetConfiguration.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wallpaper-icon.ico" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
