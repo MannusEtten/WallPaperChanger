@@ -92,9 +92,8 @@
     <Reference Include="FlickrNet">
       <HintPath>Library\FlickrNet.dll</HintPath>
     </Reference>
-    <Reference Include="Mannus.Framework">
-      <HintPath>Library\Mannus.Framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Mannus.Library">
+      <HintPath>Library\Mannus.Library.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -131,9 +130,12 @@
     <Compile Include="Desktop.cs" />
     <Compile Include="DesktopHidingChecker.cs" />
     <Compile Include="DesktopManager.cs" />
+    <Compile Include="EnumWallPaperMode.cs" />
+    <Compile Include="LibraryManager.cs" />
     <Compile Include="MannusWallpaper.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PictureManager.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -185,6 +187,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

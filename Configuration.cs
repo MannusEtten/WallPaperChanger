@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using Mannus.Library.Configuration;
+using Mannus.Library.Utilities;
 
 namespace MannusWallPaper
 {
@@ -12,14 +13,6 @@ namespace MannusWallPaper
         public static MannusWallPaperConfiguration GetConfig()
         {
             return ConfigurationManager.GetSection("MannusWallPaper") as MannusWallPaperConfiguration;
-        }
-
-        public bool UseFlickr
-        {
-            get
-            {
-                return bool.Parse(ConfigurationManager.AppSettings["useflickrwallpaper"]);
-            }
         }
 
         [ConfigurationProperty("wallpapers")]
@@ -32,6 +25,26 @@ namespace MannusWallPaper
         public GenericConfigurationElementCollection<WaterMarkFilter> WaterMarkFilters
         {
             get { return (GenericConfigurationElementCollection<WaterMarkFilter>)this["watermarkfilters"]; }
+        }
+
+        [ConfigurationProperty("imagelibraries")]
+        public GenericConfigurationElementCollection<ImageLibrary> ImageLibraries
+        {
+            get { return (GenericConfigurationElementCollection<ImageLibrary>)this["imagelibraries"]; }
+        }
+    }
+
+    public sealed class ImageLibrary : ConfigurationElementBase
+    {
+        [ConfigurationProperty("path", IsRequired = true)]
+        public string Path
+        {
+            get { return this["path"] as string; }
+        }
+
+        public override string ElementName
+        {
+            get { return "library"; }
         }
     }
 
@@ -88,32 +101,16 @@ namespace MannusWallPaper
             return ConfigurationManager.GetSection("Flickr") as FlickrConfiguration;
         }
 
-        [ConfigurationProperty("flickrsettings")]
-        public GenericConfigurationElementCollection<FlickrSettingElement> FlickrSettings
-        {
-            get { return (GenericConfigurationElementCollection<FlickrSettingElement>)this["flickrsettings"]; }
-        }
-
+        [ConfigurationProperty("changetimeinminutes", IsRequired = true)]
         public int FlickrChangeTime
         {
-            get
-            {
-                return int.Parse(FlickrSettings["changetimeinminutes"].Value);
-            }
-        }
-    }
-
-    public sealed class FlickrSettingElement : ConfigurationElementBase
-    {
-        [ConfigurationProperty("value", IsRequired = true)]
-        public string Value
-        {
-            get { return this["value"] as string; }
+            get { return (int)this["changetimeinminutes"]; }
         }
 
-        public override string ElementName
+        [ConfigurationProperty("useflickr", IsRequired = true)]
+        public bool UseFlickr
         {
-            get { return "flickrsetting"; }
+            get { return (bool)this["useflickr"]; }
         }
     }
 }

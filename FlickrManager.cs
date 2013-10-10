@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -12,41 +11,11 @@ using Mannus.Library.Logging;
 
 namespace MannusWallPaper
 {
-    public class FlickrManager
+    public class FlickrManager : PictureManager
     {
-        private Timer timer = new Timer();
-        private DesktopManager _desktopManager;
-        private ILogger _logger;
+        public FlickrManager() : base(FlickrConfiguration.GetConfig().FlickrChangeTime) {}
 
-        public FlickrManager()
-        {
-            _logger = Logger.GetLogger();
-            _desktopManager = new DesktopManager();
-        }
-        internal void StopFlickrModus()
-        {
-            timer.Enabled = false;
-            timer.Stop();
-        }
-
-        internal void StartFlickrModus()
-        {
-            int minutes = FlickrConfiguration.GetConfig().FlickrChangeTime;
-            int seconds = 60;
-            int second = 1000;
-            timer.Interval = minutes * seconds * second;
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            SetRandomWallPaper();
-            timer.Enabled = true;
-            timer.Start();
-        }
-
-        private void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            SetRandomWallPaper();
-        }
-
-        private void SetRandomWallPaper()
+        protected override void SetRandomWallPaper()
         {
             var photo = GetRandomPhoto();
             if (photo != null)
@@ -55,10 +24,7 @@ namespace MannusWallPaper
                 string fileLocation = DownloadFile(photo.LargeUrl);
                 WaterMarker waterMarker = new WaterMarker();
                 waterMarker.AddWaterMark(fileLocation, photo.Title);
-                // TODO naar MannusLibrary verplaatsen
-                Color color = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString("White");
-                _desktopManager.SetDesktopColor(color);
-                _desktopManager.SetDesktopImage(fileLocation);
+                SetWallPaper(fileLocation);
             }
         }
 
