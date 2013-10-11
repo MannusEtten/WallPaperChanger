@@ -8,11 +8,14 @@ using System.Reflection;
 using System.Timers;
 using FlickrNet;
 using Mannus.Library.Logging;
+using Mannus.Library.Utilities;
 
 namespace MannusWallPaper
 {
     public class FlickrManager : PictureManager
     {
+        private const string UNAVAILABLEPHOTONAME = "photo_unavailable.gif";
+
         public FlickrManager() : base(FlickrConfiguration.GetConfig().FlickrChangeTime) {}
 
         protected override void SetRandomWallPaper()
@@ -22,20 +25,30 @@ namespace MannusWallPaper
             {
                 _logger.LogDebug(photo.LargeUrl);
                 string fileLocation = DownloadFile(photo.LargeUrl);
-                WaterMarker waterMarker = new WaterMarker();
-                waterMarker.AddWaterMark(fileLocation, photo.Title);
-                SetWallPaper(fileLocation);
+                if (!string.IsNullOrEmpty(fileLocation))
+                {
+                    WaterMarker waterMarker = new WaterMarker();
+                    waterMarker.AddWaterMark(fileLocation, photo.Title);
+                    SetWallPaper(fileLocation);
+                }
             }
         }
 
-        private string DownloadFile(string fileName)
+        private string DownloadFile(string photoUrl)
         {
             string uriString = Assembly.GetExecutingAssembly().CodeBase;
             Uri uri = new Uri(uriString);
             string directory = Path.GetDirectoryName(uri.LocalPath);
-            WebClient client = new WebClient();
+            MannusWebClient client = new MannusWebClient();
             string newFileName = Path.Combine(directory, "flickr.jpg");
-            client.DownloadFile(fileName, newFileName);
+            client.DownloadFile(photoUrl, newFileName);
+            var responseUri = client.ResponseUri;
+            var path = responseUri.AbsolutePath.ToLowerInvariant();
+            if (path.Contains(UNAVAILABLEPHOTONAME))
+            {
+                _logger.LogInfo("no new wallpaper. Photo is unavailable /r/n {0}", photoUrl);
+                return null;
+            }
             return newFileName;
         }
 

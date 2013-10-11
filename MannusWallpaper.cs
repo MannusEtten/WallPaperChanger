@@ -145,11 +145,16 @@ namespace WallpaperChanger
             _desktopManager.SetDesktopImage(configuration.Path);
             Color color = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(configuration.DesktopBackColor);
             _desktopManager.SetDesktopColor(color);
-            var showDesktop = bool.Parse(configuration.EmptyDesktop);
+            var showDesktop = configuration.EmptyDesktop;
+            var hideIcons = configuration.HideIcons;
                 if (!showDesktop)
                 {
                     TaskBar.Show();
                     _desktopManager.ShowDesktop();
+                    if (hideIcons)
+                    {
+                        _desktopManager.ToggleDesktopIcons();
+                    }
                 }
                 else
                 {
@@ -157,6 +162,10 @@ namespace WallpaperChanger
                     _desktopManager.HideDesktop();
                     _desktopHidingChecker.CreateCheckFile();
                     _desktopHidingChecker.CheckIfDesktopMustBeShownAgain();
+                    if (hideIcons)
+                    {
+                        _desktopManager.ToggleDesktopIcons();
+                    }
                 }
         }
 
