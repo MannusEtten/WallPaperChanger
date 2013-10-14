@@ -87,13 +87,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FlickrGallery">
-      <HintPath>Library\FlickrGallery.dll</HintPath>
+      <HintPath>..\Library\FlickrGallery.dll</HintPath>
     </Reference>
     <Reference Include="FlickrNet">
-      <HintPath>Library\FlickrNet.dll</HintPath>
+      <HintPath>..\Library\FlickrNet.dll</HintPath>
     </Reference>
     <Reference Include="Mannus.Library">
-      <HintPath>Library\Mannus.Library.dll</HintPath>
+      <HintPath>..\Library\Mannus.Library.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

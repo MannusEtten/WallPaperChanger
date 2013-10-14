@@ -1,0 +1,14 @@
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\basketbalnieuws.jpg
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\esrinl.jpg
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\Log4NetConfiguration.xml
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\App.config
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\MannusWallPaper.UnitTests.dll.config
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\MannusWallPaper.UnitTests.dll
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\MannusWallPaper.UnitTests.pdb
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\MannusWallPaper.exe
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\FlickrNet.dll
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\FlickrGallery.dll
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\bin\Debug\MannusWallPaper.pdb
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\obj\Debug\MannusWallPaper.UnitTests.csprojResolveAssemblyReference.cache
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\obj\Debug\MannusWallPaper.UnitTests.dll
+C:\GitHub\WallPaperChanger\MannusWallPaper.UnitTests\obj\Debug\MannusWallPaper.UnitTests.pdb

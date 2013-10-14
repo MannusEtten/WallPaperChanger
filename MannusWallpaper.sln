@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MannusWallPaper", "MannusWallPaper.csproj", "{D0E87068-EF6A-4F98-873A-AE08226182BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MannusWallpaper", "MannusWallPaper\MannusWallpaper.csproj", "{D0E87068-EF6A-4F98-873A-AE08226182BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MannusWallPaper.UnitTests", "..\MannusWallPaper.UnitTests\MannusWallPaper.UnitTests.csproj", "{37F8183A-FD61-4519-B917-80B422283AE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MannusWallPaper.UnitTests", "MannusWallPaper.UnitTests\MannusWallPaper.UnitTests.csproj", "{37F8183A-FD61-4519-B917-80B422283AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
