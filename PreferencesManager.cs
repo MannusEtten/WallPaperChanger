@@ -28,9 +28,8 @@ namespace MannusWallPaper
         {
             XElement wallPaperDocument = new XElement("MannusWallPaperChanger");
             XElement modeXml = new XElement("wallpapermode", mode.ToString());
-            XElement wallPaperXml = new XElement("wallpaper");
-            string xmlValue = wallPaper != null ? wallPaper.ToString() : "null";
-            wallPaperXml.Value = xmlValue;
+            string xmlValue = wallPaper != null ? wallPaper.Key : "null";
+            XElement wallPaperXml = new XElement("wallpaper", xmlValue);
             wallPaperDocument.Add(modeXml);
             wallPaperDocument.Add(wallPaperXml);
             wallPaperDocument.Save(GetFilePath());
@@ -40,9 +39,13 @@ namespace MannusWallPaper
         {
             XElement wallPaperDocument = XElement.Load(GetFilePath());
             var mode = EnumHelper.ParseTextToEnumValue<EnumWallPaperMode>(wallPaperDocument.Element("wallpapermode").Value);
-            var wallpaper = wallPaperDocument.Element("wallpaper").Value;
-            var wallpaperConfiguration = WallPaperElement.CreateFromString(wallpaper);
-            return new WallPaperPreference() { WallPaper = wallpaperConfiguration, WallPaperMode = mode };
+            var wallpaperKey = wallPaperDocument.Element("wallpaper").Value;
+            if (!string.Equals(wallpaperKey, "null", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var wallpaper = MannusWallPaperConfiguration.GetConfig().WallPapers[wallpaperKey];
+                return new WallPaperPreference() { WallPaper = wallpaper, WallPaperMode = mode };
+            }
+            return new WallPaperPreference() { WallPaper = null, WallPaperMode = mode };
         }
     }
 }
