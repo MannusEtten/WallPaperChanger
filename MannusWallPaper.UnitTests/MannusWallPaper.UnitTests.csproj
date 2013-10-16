@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mannus.Library">
-      <HintPath>..\WallPaperChanger\Library\Mannus.Library.dll</HintPath>
+      <HintPath>..\Library\Mannus.Library.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -66,7 +66,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MannusWallPaper\MannusWallpaper.csproj">
       <Project>{d0e87068-ef6a-4f98-873a-ae08226182bb}</Project>
-      <Name>MannusWallPaper</Name>
+      <Name>MannusWallpaper</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

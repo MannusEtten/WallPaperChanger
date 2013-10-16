@@ -197,12 +197,12 @@ namespace WallpaperChanger
             this.wallPaperModesComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.fixedWallPapersComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.configureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.afsluitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -264,6 +264,18 @@ namespace WallpaperChanger
             this.fixedWallPapersComboBox.Size = new System.Drawing.Size(121, 23);
             this.fixedWallPapersComboBox.SelectedIndexChanged += new System.EventHandler(this.fixedWallPapersComboBox_SelectedIndexChanged);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+            // 
+            // configureMenuItem
+            // 
+            this.configureMenuItem.Name = "configureMenuItem";
+            this.configureMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.configureMenuItem.Text = "Configure";
+            this.configureMenuItem.Click += new System.EventHandler(this.configureMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -287,17 +299,6 @@ namespace WallpaperChanger
             this.afsluitenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.afsluitenToolStripMenuItem.Text = "Exit";
             this.afsluitenToolStripMenuItem.Click += new System.EventHandler(this.afsluitenToolStripMenuItem_Click);
-            // 
-            // configureMenuItem
-            // 
-            this.configureMenuItem.Name = "configureMenuItem";
-            this.configureMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.configureMenuItem.Text = "Configure";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
             // 
             // Form1
             // 
@@ -369,6 +370,12 @@ namespace WallpaperChanger
         private void fixedWallPapersComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetDesktop();
+        }
+
+        private void configureMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurationForm configurationForm = new ConfigurationForm();
+            configurationForm.ShowDialog();
         }
     }
 }

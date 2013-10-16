@@ -92,7 +92,8 @@
     <Reference Include="FlickrNet">
       <HintPath>..\Library\FlickrNet.dll</HintPath>
     </Reference>
-    <Reference Include="Mannus.Library">
+    <Reference Include="Mannus.Library, Version=1.0.5032.29248, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Mannus.Library.dll</HintPath>
     </Reference>
     <Reference Include="System">
@@ -129,6 +130,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration.cs" />
+    <Compile Include="ConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationForm.Designer.cs">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Desktop.cs" />
     <Compile Include="DesktopHidingChecker.cs" />
     <Compile Include="DesktopManager.cs" />
@@ -161,6 +168,9 @@
     <Content Include="wallpaper-icon.ico" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MannusWallpaper.resx">
       <DependentUpon>MannusWallpaper.cs</DependentUpon>
