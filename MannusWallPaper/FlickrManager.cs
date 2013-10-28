@@ -55,6 +55,11 @@ namespace MannusWallPaper
 
         private Photo GetRandomPhoto()
         {
+            /*
+            var settings = new FlickrGalleries.Settings();
+
+            FlickrGalleries.Settings.apiKey = FlickrConfiguration.GetConfig().ApiKey;
+            FlickrGalleries.Settings.apiSharedSecret = FlickrConfiguration.GetConfig().ApiSharedSecret;
             List<Photoset> set = new FlickrGalleries.Sets().GetPhotoSets();
             Random random = new Random();
             if (set != null)
@@ -66,6 +71,7 @@ namespace MannusWallPaper
                 int r2 = random.Next(0, setphotos.Count - 1);
                 return setphotos[r2];
             }
+             */
             return null;
         }
     }

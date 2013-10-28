@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxLocationEnableFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridFilters = new System.Windows.Forms.DataGridView();
+            this.textBoxFlickrInterval = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.useFlickrCheckbox = new System.Windows.Forms.CheckBox();
             this.flickrGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxPageSize = new System.Windows.Forms.TextBox();
+            this.textBoxSetUrl = new System.Windows.Forms.TextBox();
+            this.textBoxUserId = new System.Windows.Forms.TextBox();
+            this.textBoxAPISharedSecret = new System.Windows.Forms.TextBox();
+            this.textBoxAPIKey = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,22 +49,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.dataGridFilters = new System.Windows.Forms.DataGridView();
-            this.Prefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.dataGridWallpapers = new System.Windows.Forms.DataGridView();
+            this.dataGridLibraries = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.flickrGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFilters)).BeginInit();
+            this.flickrGroupBox.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridWallpapers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLibraries)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBoxLocationEnableFile);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBoxFlickrInterval);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.useFlickrCheckbox);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
@@ -73,12 +78,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
-            // textBox2
+            // textBoxLocationEnableFile
             // 
-            this.textBox2.Location = new System.Drawing.Point(206, 13);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.textBoxLocationEnableFile.Location = new System.Drawing.Point(206, 13);
+            this.textBoxLocationEnableFile.Name = "textBoxLocationEnableFile";
+            this.textBoxLocationEnableFile.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLocationEnableFile.TabIndex = 4;
             // 
             // label2
             // 
@@ -99,12 +104,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Name filters";
             // 
-            // textBox1
+            // dataGridFilters
             // 
-            this.textBox1.Location = new System.Drawing.Point(298, 34);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.dataGridFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridFilters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridFilters.Location = new System.Drawing.Point(3, 16);
+            this.dataGridFilters.MultiSelect = false;
+            this.dataGridFilters.Name = "dataGridFilters";
+            this.dataGridFilters.Size = new System.Drawing.Size(476, 68);
+            this.dataGridFilters.TabIndex = 0;
+            // 
+            // textBoxFlickrInterval
+            // 
+            this.textBoxFlickrInterval.Location = new System.Drawing.Point(298, 34);
+            this.textBoxFlickrInterval.Name = "textBoxFlickrInterval";
+            this.textBoxFlickrInterval.Size = new System.Drawing.Size(100, 20);
+            this.textBoxFlickrInterval.TabIndex = 0;
             // 
             // label1
             // 
@@ -128,11 +144,11 @@
             // 
             // flickrGroupBox
             // 
-            this.flickrGroupBox.Controls.Add(this.textBox7);
-            this.flickrGroupBox.Controls.Add(this.textBox6);
-            this.flickrGroupBox.Controls.Add(this.textBox5);
-            this.flickrGroupBox.Controls.Add(this.textBox4);
-            this.flickrGroupBox.Controls.Add(this.textBox3);
+            this.flickrGroupBox.Controls.Add(this.textBoxPageSize);
+            this.flickrGroupBox.Controls.Add(this.textBoxSetUrl);
+            this.flickrGroupBox.Controls.Add(this.textBoxUserId);
+            this.flickrGroupBox.Controls.Add(this.textBoxAPISharedSecret);
+            this.flickrGroupBox.Controls.Add(this.textBoxAPIKey);
             this.flickrGroupBox.Controls.Add(this.label7);
             this.flickrGroupBox.Controls.Add(this.label6);
             this.flickrGroupBox.Controls.Add(this.label5);
@@ -146,40 +162,40 @@
             this.flickrGroupBox.TabStop = false;
             this.flickrGroupBox.Text = "Flick\'r";
             // 
-            // textBox7
+            // textBoxPageSize
             // 
-            this.textBox7.Location = new System.Drawing.Point(435, 40);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 9;
+            this.textBoxPageSize.Location = new System.Drawing.Point(435, 40);
+            this.textBoxPageSize.Name = "textBoxPageSize";
+            this.textBoxPageSize.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPageSize.TabIndex = 9;
             // 
-            // textBox6
+            // textBoxSetUrl
             // 
-            this.textBox6.Location = new System.Drawing.Point(313, 46);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 8;
+            this.textBoxSetUrl.Location = new System.Drawing.Point(313, 46);
+            this.textBoxSetUrl.Name = "textBoxSetUrl";
+            this.textBoxSetUrl.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSetUrl.TabIndex = 8;
             // 
-            // textBox5
+            // textBoxUserId
             // 
-            this.textBox5.Location = new System.Drawing.Point(313, 20);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 7;
+            this.textBoxUserId.Location = new System.Drawing.Point(313, 20);
+            this.textBoxUserId.Name = "textBoxUserId";
+            this.textBoxUserId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxUserId.TabIndex = 7;
             // 
-            // textBox4
+            // textBoxAPISharedSecret
             // 
-            this.textBox4.Location = new System.Drawing.Point(134, 46);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 6;
+            this.textBoxAPISharedSecret.Location = new System.Drawing.Point(134, 46);
+            this.textBoxAPISharedSecret.Name = "textBoxAPISharedSecret";
+            this.textBoxAPISharedSecret.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAPISharedSecret.TabIndex = 6;
             // 
-            // textBox3
+            // textBoxAPIKey
             // 
-            this.textBox3.Location = new System.Drawing.Point(134, 20);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.textBoxAPIKey.Location = new System.Drawing.Point(134, 20);
+            this.textBoxAPIKey.Name = "textBoxAPIKey";
+            this.textBoxAPIKey.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAPIKey.TabIndex = 5;
             // 
             // label7
             // 
@@ -228,6 +244,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.dataGridLibraries);
             this.groupBox3.Location = new System.Drawing.Point(13, 370);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(537, 70);
@@ -237,29 +254,13 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.dataGridWallpapers);
             this.groupBox5.Location = new System.Drawing.Point(13, 174);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(530, 51);
+            this.groupBox5.Size = new System.Drawing.Size(530, 102);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Wallpapers";
-            // 
-            // dataGridFilters
-            // 
-            this.dataGridFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridFilters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Prefix});
-            this.dataGridFilters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridFilters.Location = new System.Drawing.Point(3, 16);
-            this.dataGridFilters.Name = "dataGridFilters";
-            this.dataGridFilters.Size = new System.Drawing.Size(476, 68);
-            this.dataGridFilters.TabIndex = 0;
-            // 
-            // Prefix
-            // 
-            this.Prefix.Frozen = true;
-            this.Prefix.HeaderText = "Prefix";
-            this.Prefix.Name = "Prefix";
             // 
             // okButton
             // 
@@ -280,6 +281,28 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // dataGridWallpapers
+            // 
+            this.dataGridWallpapers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridWallpapers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridWallpapers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridWallpapers.Location = new System.Drawing.Point(3, 16);
+            this.dataGridWallpapers.MultiSelect = false;
+            this.dataGridWallpapers.Name = "dataGridWallpapers";
+            this.dataGridWallpapers.Size = new System.Drawing.Size(524, 83);
+            this.dataGridWallpapers.TabIndex = 1;
+            // 
+            // dataGridLibraries
+            // 
+            this.dataGridLibraries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridLibraries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridLibraries.Location = new System.Drawing.Point(3, 16);
+            this.dataGridLibraries.MultiSelect = false;
+            this.dataGridLibraries.Name = "dataGridLibraries";
+            this.dataGridLibraries.Size = new System.Drawing.Size(531, 51);
+            this.dataGridLibraries.TabIndex = 2;
             // 
             // ConfigurationForm
             // 
@@ -302,9 +325,13 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilters)).EndInit();
             this.flickrGroupBox.ResumeLayout(false);
             this.flickrGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridFilters)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridWallpapers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLibraries)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -316,24 +343,25 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox useFlickrCheckbox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxFlickrInterval;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxLocationEnableFile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxPageSize;
+        private System.Windows.Forms.TextBox textBoxSetUrl;
+        private System.Windows.Forms.TextBox textBoxUserId;
+        private System.Windows.Forms.TextBox textBoxAPISharedSecret;
+        private System.Windows.Forms.TextBox textBoxAPIKey;
         private System.Windows.Forms.DataGridView dataGridFilters;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prefix;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.DataGridView dataGridWallpapers;
+        private System.Windows.Forms.DataGridView dataGridLibraries;
     }
 }
