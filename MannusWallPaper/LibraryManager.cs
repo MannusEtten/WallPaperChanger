@@ -9,9 +9,6 @@ namespace MannusWallPaper
 {
     public class LibraryManager : PictureManager
     {
-        // TODO: change time instellen voor zowel flickr als library
-        public LibraryManager() : base(5){}
-
         protected override void SetRandomWallPaper()
         {
             var imageLibraries = MannusWallPaperConfiguration.GetConfig().ImageLibraries; 
@@ -21,6 +18,11 @@ namespace MannusWallPaper
                 var randomIndex = random.Next(0, imageLibraries.Count -1);
                 var imageDirectory = imageLibraries[randomIndex];
                 DirectoryInfo directory = new DirectoryInfo(imageDirectory.Path);
+                if (!directory.Exists)
+                {
+                    _logger.LogError("Directory {0} doesn't exist", directory.FullName);
+                    return;
+                }
                 var images = directory.GetImages();
                 randomIndex = random.Next(0, images.Count - 1);
                 var randomImage = images[randomIndex];

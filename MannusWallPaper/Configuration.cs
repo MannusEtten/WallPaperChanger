@@ -25,13 +25,6 @@ namespace MannusWallPaper
             set { this["apisharedsecret"] = value; }
         }
 
-        [ConfigurationProperty("changetimeinminutes", IsRequired = true)]
-        public int FlickrChangeTime
-        {
-            get { return (int)this["changetimeinminutes"]; }
-            set { this["changetimeinminutes"] = value; }
-        }
-
         [ConfigurationProperty("pagesize", IsRequired = true)]
         public int PageSize
         {
@@ -102,6 +95,11 @@ namespace MannusWallPaper
         {
             get { return (GenericConfigurationElementCollection<WaterMarkFilter>)this["watermarkfilters"]; }
             set { this["watermarkfilters"] = value; }
+        }
+
+        public WallPaperElement GetWallPaper(string name)
+        {
+            return WallPapers[name];
         }
 
         public static MannusWallPaperConfiguration GetConfig()

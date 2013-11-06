@@ -17,8 +17,6 @@ namespace MannusWallPaper
         // TODO watermarkfilters ook gebruiken voor library
         private const string UNAVAILABLEPHOTONAME = "photo_unavailable.gif";
 
-        public FlickrManager() : base(FlickrConfiguration.GetConfig().FlickrChangeTime) {}
-
         protected override void SetRandomWallPaper()
         {
             var photo = GetRandomPhoto();

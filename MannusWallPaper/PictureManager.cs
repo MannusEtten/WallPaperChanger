@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,9 @@ namespace MannusWallPaper
         protected ILogger _logger;
         private int _intervalInMinutes;
 
-        public PictureManager(int intervalInMinutes)
+        public PictureManager()
         {
-            _intervalInMinutes = intervalInMinutes;
-
+            _intervalInMinutes = int.Parse(ConfigurationManager.AppSettings["changetimeinminutes"]);
             _logger = Logger.GetLogger();
             _desktopManager = new DesktopManager();
         }

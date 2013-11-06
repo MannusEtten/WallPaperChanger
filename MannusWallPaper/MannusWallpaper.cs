@@ -29,16 +29,29 @@ namespace WallpaperChanger
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem configureMenuItem;
         private DesktopHidingChecker _desktopHidingChecker;
+        private PreferencesManager _preferencesManager;
 
         public Form1()
         {
             InitializeComponent();
+            _preferencesManager = new PreferencesManager();
             _desktopManager = new DesktopManager();
             _desktopHidingChecker = new DesktopHidingChecker();
             SetWallPaperModes();
             SetFixedWallPapers();
+            LoadPreferences();
             EnableComboBox();
             SetDesktop();
+        }
+
+        private void LoadPreferences()
+        {
+            var preferences = _preferencesManager.GetWallPaperPreferences();
+            wallPaperModesComboBox.SelectedItem = preferences.WallPaperMode;
+            if(preferences.WallPaperMode == EnumWallPaperMode.FixedWallPaper)
+            {
+                fixedWallPapersComboBox.SelectedText = preferences.WallPaper.Description;
+            }
         }
 
         private void SetFixedWallPapers()
@@ -86,7 +99,7 @@ namespace WallpaperChanger
             {
                 case EnumWallPaperMode.FixedWallPaper:
                     _flickrManager.Stop();
-                    // libraries.stop
+                    _libraryManager.Stop();
                     SetDesktopWithFixedWallPaper();
                     break;
                 case EnumWallPaperMode.Flickr:
@@ -117,7 +130,6 @@ namespace WallpaperChanger
                     _libraryManager.Start();
                     break;
             }
-
         }
 
         private EnumWallPaperMode GetRandomWallPaperMode()
@@ -228,7 +240,7 @@ namespace WallpaperChanger
             this.toolStripSeparator3,
             this.afsluitenToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 200);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(201, 178);
             this.contextMenuStrip1.Text = "Hoofdmenu";
             // 
             // toolStripTextBox1
@@ -303,6 +315,7 @@ namespace WallpaperChanger
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(225, 34);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.ControlBox = false;
@@ -330,6 +343,7 @@ namespace WallpaperChanger
 
         private void afsluitenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SavePreferences();
             Close();
         }
 
@@ -361,10 +375,22 @@ namespace WallpaperChanger
             }
         }
 
+        private void SavePreferences()
+        {
+            var mode = GetSelectedWallPaperMode();
+            WallPaperElement wallPaper = null;
+            if (mode == EnumWallPaperMode.FixedWallPaper)
+            {
+                wallPaper = MannusWallPaperConfiguration.GetConfig().GetWallPaper(wallPaperModesComboBox.Text);
+            }
+            _preferencesManager.SetWallPaperPreferences(mode, wallPaper);
+        }
+
         private void wallPaperModesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             EnableComboBox();
             SetDesktop();
+            SavePreferences();
         }
 
         private void fixedWallPapersComboBox_SelectedIndexChanged(object sender, EventArgs e)

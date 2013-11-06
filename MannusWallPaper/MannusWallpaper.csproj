@@ -203,7 +203,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="FlickrNet.chm" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
