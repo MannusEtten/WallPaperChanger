@@ -33,8 +33,6 @@ namespace MannusWallPaper
             textBoxLocationEnableFile.Text = ConfigurationManager.AppSettings["locationofenablefile"];
             useFlickrCheckbox.Checked = FlickrConfiguration.GetConfig().UseFlickr;
             textBoxFlickrInterval.Text = ConfigurationManager.AppSettings["changetimeinminutes"];
-            textBoxAPIKey.Text = FlickrConfiguration.GetConfig().ApiKey;
-            textBoxAPISharedSecret.Text = FlickrConfiguration.GetConfig().ApiSharedSecret;
             textBoxSetUrl.Text = FlickrConfiguration.GetConfig().SetUrl;
             textBoxUserId.Text = FlickrConfiguration.GetConfig().UserId;
             textBoxPageSize.Text = FlickrConfiguration.GetConfig().PageSize.ToString();
@@ -100,8 +98,6 @@ namespace MannusWallPaper
             var flickrSection = (FlickrConfiguration)config.GetSection("Flickr");
             flickrSection.UseFlickr = useFlickrCheckbox.Checked;
             config.AppSettings.Settings["changetimeinminutes"].Value = textBoxFlickrInterval.Text;
-            flickrSection.ApiKey = textBoxAPIKey.Text;
-            flickrSection.ApiSharedSecret = textBoxAPISharedSecret.Text;
             flickrSection.SetUrl = textBoxSetUrl.Text;
             flickrSection.UserId = textBoxUserId.Text;
             flickrSection.PageSize = int.Parse(textBoxPageSize.Text);
@@ -164,8 +160,6 @@ namespace MannusWallPaper
 
         private void SetStateOfFlickrTextBoxes()
         {
-            textBoxAPIKey.Enabled = useFlickrCheckbox.Checked;
-            textBoxAPISharedSecret.Enabled = useFlickrCheckbox.Checked;
             textBoxPageSize.Enabled = useFlickrCheckbox.Checked;
             textBoxSetUrl.Enabled = useFlickrCheckbox.Checked;
             textBoxUserId.Enabled = useFlickrCheckbox.Checked;

@@ -9,6 +9,8 @@ using System.Timers;
 using FlickrNet;
 using Mannus.Library.Logging;
 using Mannus.Library.Utilities;
+using System.Diagnostics;
+using System.IO.IsolatedStorage;
 
 namespace MannusWallPaper
 {
@@ -16,7 +18,14 @@ namespace MannusWallPaper
     {
         // TODO watermarkfilters ook gebruiken voor library
         private const string UNAVAILABLEPHOTONAME = "photo_unavailable.gif";
+        private readonly Flickr _flickr;
+        private readonly IsolatedStorageManager _isolatedStorage;
 
+        public FlickrManager()
+        {
+            _flickr = new Flickr("04b183e090d0f3eaaf84240f18a7dc2a", "5a1315102ff1e88f");
+            _isolatedStorage = new IsolatedStorageManager();
+        }
         protected override void SetRandomWallPaper()
         {
             var photo = GetRandomPhoto();
@@ -53,6 +62,7 @@ namespace MannusWallPaper
 
         private Photo GetRandomPhoto()
         {
+
             /*
             var settings = new FlickrGalleries.Settings();
 
@@ -71,6 +81,58 @@ namespace MannusWallPaper
             }
              */
             return null;
+        }
+
+        public bool LoginToFlickr()
+        {
+            var loginSuccesFull = LoginWithExistingCredentials();
+            if(loginSuccesFull)
+            {
+                return true;
+            }
+            return LoginForTheFirstTime();
+        }
+
+        private bool LoginForTheFirstTime()
+        {
+            OAuthRequestToken requestToken = _flickr.OAuthGetRequestToken("oob");
+            string url = _flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Write);
+            Process.Start(url);
+            Console.WriteLine("Enter the verifier code");
+            string verifierCode = Console.ReadLine();
+            try
+            {
+                var accessToken = _flickr.OAuthGetAccessToken(requestToken, verifierCode);
+                _isolatedStorage.OAuthToken = accessToken.Token;
+                _isolatedStorage.OAuthTokenSecret = accessToken.TokenSecret;
+                _flickr.OAuthAccessToken = accessToken.Token;
+                _flickr.OAuthAccessTokenSecret = accessToken.TokenSecret;
+            }
+            catch (FlickrApiException ex)
+            {
+                _isolatedStorage.DeleteIsolatedStorage();
+                return false;
+            }
+            return true;
+        }
+
+        private bool LoginWithExistingCredentials()
+        {
+            var token = _isolatedStorage.OAuthToken;
+            var secret = _isolatedStorage.OAuthTokenSecret;
+            if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(secret))
+            {
+                _flickr.OAuthAccessToken = token;
+                _flickr.OAuthAccessTokenSecret = secret;
+                var result = _flickr.AuthOAuthCheckToken();
+                var loginSuccessFull = result.Token.Equals(_flickr.OAuthAccessToken);
+                if (!loginSuccessFull)
+                {
+                    _isolatedStorage.DeleteIsolatedStorage();
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

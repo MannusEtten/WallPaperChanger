@@ -142,6 +142,7 @@
     <Compile Include="DesktopHidingChecker.cs" />
     <Compile Include="DesktopManager.cs" />
     <Compile Include="EnumWallPaperMode.cs" />
+    <Compile Include="IsolatedStorageManager.cs" />
     <Compile Include="LibraryManager.cs" />
     <Compile Include="MannusWallpaper.cs">
       <SubType>Form</SubType>
@@ -204,9 +205,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

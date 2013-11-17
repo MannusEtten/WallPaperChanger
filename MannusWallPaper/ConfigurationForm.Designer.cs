@@ -34,16 +34,6 @@
             this.dataGridFilters = new System.Windows.Forms.DataGridView();
             this.textBoxFlickrInterval = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPageSize = new System.Windows.Forms.TextBox();
-            this.textBoxSetUrl = new System.Windows.Forms.TextBox();
-            this.textBoxUserId = new System.Windows.Forms.TextBox();
-            this.textBoxAPISharedSecret = new System.Windows.Forms.TextBox();
-            this.textBoxAPIKey = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.dataGridLibraries = new System.Windows.Forms.DataGridView();
             this.dataGridWallpapers = new System.Windows.Forms.DataGridView();
             this.okButton = new System.Windows.Forms.Button();
@@ -52,8 +42,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxUserId = new System.Windows.Forms.TextBox();
+            this.textBoxSetUrl = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxPageSize = new System.Windows.Forms.TextBox();
             this.useFlickrCheckbox = new System.Windows.Forms.CheckBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLibraries)).BeginInit();
@@ -117,86 +113,6 @@
             this.label1.Size = new System.Drawing.Size(123, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "interval changing picture";
-            // 
-            // textBoxPageSize
-            // 
-            this.textBoxPageSize.Location = new System.Drawing.Point(144, 230);
-            this.textBoxPageSize.Name = "textBoxPageSize";
-            this.textBoxPageSize.Size = new System.Drawing.Size(348, 20);
-            this.textBoxPageSize.TabIndex = 9;
-            // 
-            // textBoxSetUrl
-            // 
-            this.textBoxSetUrl.Location = new System.Drawing.Point(144, 193);
-            this.textBoxSetUrl.Name = "textBoxSetUrl";
-            this.textBoxSetUrl.Size = new System.Drawing.Size(348, 20);
-            this.textBoxSetUrl.TabIndex = 8;
-            // 
-            // textBoxUserId
-            // 
-            this.textBoxUserId.Location = new System.Drawing.Point(144, 156);
-            this.textBoxUserId.Name = "textBoxUserId";
-            this.textBoxUserId.Size = new System.Drawing.Size(348, 20);
-            this.textBoxUserId.TabIndex = 7;
-            // 
-            // textBoxAPISharedSecret
-            // 
-            this.textBoxAPISharedSecret.Location = new System.Drawing.Point(144, 119);
-            this.textBoxAPISharedSecret.Name = "textBoxAPISharedSecret";
-            this.textBoxAPISharedSecret.Size = new System.Drawing.Size(348, 20);
-            this.textBoxAPISharedSecret.TabIndex = 6;
-            // 
-            // textBoxAPIKey
-            // 
-            this.textBoxAPIKey.Location = new System.Drawing.Point(144, 82);
-            this.textBoxAPIKey.Name = "textBoxAPIKey";
-            this.textBoxAPIKey.Size = new System.Drawing.Size(348, 20);
-            this.textBoxAPIKey.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(41, 237);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Pagesize";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(41, 200);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Set url";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 163);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "User ID";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 126);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "API shared secret";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "API key";
             // 
             // dataGridLibraries
             // 
@@ -289,27 +205,53 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Libraries";
             // 
-            // tabPage4
+            // label5
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.White;
-            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage4.Controls.Add(this.useFlickrCheckbox);
-            this.tabPage4.Controls.Add(this.textBoxPageSize);
-            this.tabPage4.Controls.Add(this.label7);
-            this.tabPage4.Controls.Add(this.textBoxSetUrl);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.textBoxUserId);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.textBoxAPIKey);
-            this.tabPage4.Controls.Add(this.textBoxAPISharedSecret);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.Controls.Add(this.label5);
-            this.tabPage4.ForeColor = System.Drawing.Color.Black;
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(550, 429);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Flick\'r";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "User ID";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(43, 125);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Set url";
+            // 
+            // textBoxUserId
+            // 
+            this.textBoxUserId.Location = new System.Drawing.Point(146, 81);
+            this.textBoxUserId.Name = "textBoxUserId";
+            this.textBoxUserId.Size = new System.Drawing.Size(348, 20);
+            this.textBoxUserId.TabIndex = 7;
+            // 
+            // textBoxSetUrl
+            // 
+            this.textBoxSetUrl.Location = new System.Drawing.Point(146, 118);
+            this.textBoxSetUrl.Name = "textBoxSetUrl";
+            this.textBoxSetUrl.Size = new System.Drawing.Size(348, 20);
+            this.textBoxSetUrl.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(43, 162);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Pagesize";
+            // 
+            // textBoxPageSize
+            // 
+            this.textBoxPageSize.Location = new System.Drawing.Point(146, 155);
+            this.textBoxPageSize.Name = "textBoxPageSize";
+            this.textBoxPageSize.Size = new System.Drawing.Size(348, 20);
+            this.textBoxPageSize.TabIndex = 9;
             // 
             // useFlickrCheckbox
             // 
@@ -321,6 +263,24 @@
             this.useFlickrCheckbox.Text = "use Flick\'r";
             this.useFlickrCheckbox.UseVisualStyleBackColor = true;
             this.useFlickrCheckbox.Click += new System.EventHandler(this.useFlickrCheckbox_Click_1);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage4.Controls.Add(this.useFlickrCheckbox);
+            this.tabPage4.Controls.Add(this.textBoxPageSize);
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.textBoxSetUrl);
+            this.tabPage4.Controls.Add(this.textBoxUserId);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.label5);
+            this.tabPage4.ForeColor = System.Drawing.Color.Black;
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(550, 429);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Flick\'r";
             // 
             // ConfigurationForm
             // 
@@ -360,16 +320,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox textBoxLocationEnableFile;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxPageSize;
-        private System.Windows.Forms.TextBox textBoxSetUrl;
-        private System.Windows.Forms.TextBox textBoxUserId;
-        private System.Windows.Forms.TextBox textBoxAPISharedSecret;
-        private System.Windows.Forms.TextBox textBoxAPIKey;
         private System.Windows.Forms.DataGridView dataGridFilters;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
@@ -381,5 +331,11 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.CheckBox useFlickrCheckbox;
+        private System.Windows.Forms.TextBox textBoxPageSize;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxSetUrl;
+        private System.Windows.Forms.TextBox textBoxUserId;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

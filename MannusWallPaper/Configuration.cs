@@ -11,20 +11,6 @@ namespace MannusWallPaper
 {
     public sealed class FlickrConfiguration : ConfigurationSection
     {
-        [ConfigurationProperty("apikey", IsRequired = true)]
-        public string ApiKey
-        {
-            get { return this["apikey"] as string; }
-            set { this["apikey"] = value; }
-        }
-
-        [ConfigurationProperty("apisharedsecret", IsRequired = true)]
-        public string ApiSharedSecret
-        {
-            get { return this["apisharedsecret"] as string; }
-            set { this["apisharedsecret"] = value; }
-        }
-
         [ConfigurationProperty("pagesize", IsRequired = true)]
         public int PageSize
         {
