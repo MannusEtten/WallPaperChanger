@@ -10,14 +10,24 @@ using System.Windows.Forms;
 using System.Configuration;
 using Mannus.Library.Configuration;
 using Mannus.Library.Utilities;
+using FlickrNet;
+using System.Diagnostics;
 namespace MannusWallPaper
 {
     public partial class ConfigurationForm : Form
     {
+        private FlickrManager _flickrManager;
+        private Flickr _flickr;
+        private IsolatedStorageManager _storageManager;
+        private OAuthRequestToken _token;
         public ConfigurationForm()
         {
             InitializeComponent();
             LoadData();
+            _flickrManager = new FlickrManager();
+            _flickr = new Flickr();
+            _storageManager = new IsolatedStorageManager();
+            _token = null;
         }
 
         private void LoadData()
@@ -163,11 +173,49 @@ namespace MannusWallPaper
             textBoxPageSize.Enabled = useFlickrCheckbox.Checked;
             textBoxSetUrl.Enabled = useFlickrCheckbox.Checked;
             textBoxUserId.Enabled = useFlickrCheckbox.Checked;
+            var isolatedStorageManager = new IsolatedStorageManager();
+            var flickrIsAuthenticated = _flickrManager.LoginToFlickr();
+            flickrAuthenticationGroupBox.Enabled = useFlickrCheckbox.Checked && !flickrIsAuthenticated;
+            flickrSettingsGroupbox.Enabled = useFlickrCheckbox.Checked && flickrIsAuthenticated;
+            button2.Enabled = txtVerifierCode.Text.Length > 10;
         }
 
-        private void useFlickrCheckbox_Click_1(object sender, EventArgs e)
+        private void useFlickrCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             SetStateOfFlickrTextBoxes();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AuthenticationStepOne();
+        }
+
+        private void AuthenticationStepOne()
+        {
+            OAuthRequestToken requestToken = _flickr.OAuthGetRequestToken("oob");
+            string url = _flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Write);
+            _token = requestToken;
+            Process.Start(url);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AuthenticationStepTwo();
+        }
+
+        private void AuthenticationStepTwo()
+        {
+                var token = _storageManager.OAuthToken;
+                var accessToken = _flickr.OAuthGetAccessToken(_token, txtVerifierCode.Text);
+                _storageManager.OAuthToken = accessToken.Token;
+                _storageManager.OAuthTokenSecret = accessToken.TokenSecret;
+                _flickr.OAuthAccessToken = accessToken.Token;
+                _flickr.OAuthAccessTokenSecret = accessToken.TokenSecret;
+        }
+
+        private void txtVerifierCode_TextChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = txtVerifierCode.Text.Length > 10;
         }
     }
 }

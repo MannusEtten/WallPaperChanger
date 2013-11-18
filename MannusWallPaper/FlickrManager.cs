@@ -85,39 +85,6 @@ namespace MannusWallPaper
 
         public bool LoginToFlickr()
         {
-            var loginSuccesFull = LoginWithExistingCredentials();
-            if(loginSuccesFull)
-            {
-                return true;
-            }
-            return LoginForTheFirstTime();
-        }
-
-        private bool LoginForTheFirstTime()
-        {
-            OAuthRequestToken requestToken = _flickr.OAuthGetRequestToken("oob");
-            string url = _flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Write);
-            Process.Start(url);
-            Console.WriteLine("Enter the verifier code");
-            string verifierCode = Console.ReadLine();
-            try
-            {
-                var accessToken = _flickr.OAuthGetAccessToken(requestToken, verifierCode);
-                _isolatedStorage.OAuthToken = accessToken.Token;
-                _isolatedStorage.OAuthTokenSecret = accessToken.TokenSecret;
-                _flickr.OAuthAccessToken = accessToken.Token;
-                _flickr.OAuthAccessTokenSecret = accessToken.TokenSecret;
-            }
-            catch (FlickrApiException ex)
-            {
-                _isolatedStorage.DeleteIsolatedStorage();
-                return false;
-            }
-            return true;
-        }
-
-        private bool LoginWithExistingCredentials()
-        {
             var token = _isolatedStorage.OAuthToken;
             var secret = _isolatedStorage.OAuthTokenSecret;
             if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(secret))

@@ -42,14 +42,20 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.useFlickrCheckbox = new System.Windows.Forms.CheckBox();
+            this.flickrSettingsGroupbox = new System.Windows.Forms.GroupBox();
+            this.textBoxUserId = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxUserId = new System.Windows.Forms.TextBox();
+            this.textBoxPageSize = new System.Windows.Forms.TextBox();
             this.textBoxSetUrl = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBoxPageSize = new System.Windows.Forms.TextBox();
-            this.useFlickrCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.flickrAuthenticationGroupBox = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtVerifierCode = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFilters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLibraries)).BeginInit();
@@ -59,6 +65,8 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.flickrSettingsGroupbox.SuspendLayout();
+            this.flickrAuthenticationGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxLocationEnableFile
@@ -205,10 +213,58 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Libraries";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage4.Controls.Add(this.useFlickrCheckbox);
+            this.tabPage4.Controls.Add(this.flickrSettingsGroupbox);
+            this.tabPage4.Controls.Add(this.flickrAuthenticationGroupBox);
+            this.tabPage4.ForeColor = System.Drawing.Color.Black;
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(550, 429);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Flick\'r";
+            // 
+            // useFlickrCheckbox
+            // 
+            this.useFlickrCheckbox.AutoSize = true;
+            this.useFlickrCheckbox.Location = new System.Drawing.Point(25, 12);
+            this.useFlickrCheckbox.Name = "useFlickrCheckbox";
+            this.useFlickrCheckbox.Size = new System.Drawing.Size(73, 17);
+            this.useFlickrCheckbox.TabIndex = 16;
+            this.useFlickrCheckbox.Text = "use Flick\'r";
+            this.useFlickrCheckbox.UseVisualStyleBackColor = true;
+            this.useFlickrCheckbox.CheckedChanged += new System.EventHandler(this.useFlickrCheckbox_CheckedChanged);
+            // 
+            // flickrSettingsGroupbox
+            // 
+            this.flickrSettingsGroupbox.Controls.Add(this.textBoxUserId);
+            this.flickrSettingsGroupbox.Controls.Add(this.label5);
+            this.flickrSettingsGroupbox.Controls.Add(this.label6);
+            this.flickrSettingsGroupbox.Controls.Add(this.textBoxPageSize);
+            this.flickrSettingsGroupbox.Controls.Add(this.textBoxSetUrl);
+            this.flickrSettingsGroupbox.Controls.Add(this.label7);
+            this.flickrSettingsGroupbox.Enabled = false;
+            this.flickrSettingsGroupbox.Location = new System.Drawing.Point(25, 147);
+            this.flickrSettingsGroupbox.Name = "flickrSettingsGroupbox";
+            this.flickrSettingsGroupbox.Size = new System.Drawing.Size(497, 256);
+            this.flickrSettingsGroupbox.TabIndex = 15;
+            this.flickrSettingsGroupbox.TabStop = false;
+            this.flickrSettingsGroupbox.Text = "Flick\'r settings";
+            // 
+            // textBoxUserId
+            // 
+            this.textBoxUserId.Location = new System.Drawing.Point(114, 58);
+            this.textBoxUserId.Name = "textBoxUserId";
+            this.textBoxUserId.Size = new System.Drawing.Size(348, 20);
+            this.textBoxUserId.TabIndex = 7;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 88);
+            this.label5.Location = new System.Drawing.Point(11, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 2;
@@ -217,22 +273,22 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(43, 125);
+            this.label6.Location = new System.Drawing.Point(11, 102);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "Set url";
             // 
-            // textBoxUserId
+            // textBoxPageSize
             // 
-            this.textBoxUserId.Location = new System.Drawing.Point(146, 81);
-            this.textBoxUserId.Name = "textBoxUserId";
-            this.textBoxUserId.Size = new System.Drawing.Size(348, 20);
-            this.textBoxUserId.TabIndex = 7;
+            this.textBoxPageSize.Location = new System.Drawing.Point(114, 132);
+            this.textBoxPageSize.Name = "textBoxPageSize";
+            this.textBoxPageSize.Size = new System.Drawing.Size(348, 20);
+            this.textBoxPageSize.TabIndex = 9;
             // 
             // textBoxSetUrl
             // 
-            this.textBoxSetUrl.Location = new System.Drawing.Point(146, 118);
+            this.textBoxSetUrl.Location = new System.Drawing.Point(114, 95);
             this.textBoxSetUrl.Name = "textBoxSetUrl";
             this.textBoxSetUrl.Size = new System.Drawing.Size(348, 20);
             this.textBoxSetUrl.TabIndex = 8;
@@ -240,47 +296,62 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(43, 162);
+            this.label7.Location = new System.Drawing.Point(11, 139);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 4;
             this.label7.Text = "Pagesize";
             // 
-            // textBoxPageSize
+            // flickrAuthenticationGroupBox
             // 
-            this.textBoxPageSize.Location = new System.Drawing.Point(146, 155);
-            this.textBoxPageSize.Name = "textBoxPageSize";
-            this.textBoxPageSize.Size = new System.Drawing.Size(348, 20);
-            this.textBoxPageSize.TabIndex = 9;
+            this.flickrAuthenticationGroupBox.Controls.Add(this.label3);
+            this.flickrAuthenticationGroupBox.Controls.Add(this.txtVerifierCode);
+            this.flickrAuthenticationGroupBox.Controls.Add(this.button2);
+            this.flickrAuthenticationGroupBox.Controls.Add(this.button1);
+            this.flickrAuthenticationGroupBox.Enabled = false;
+            this.flickrAuthenticationGroupBox.Location = new System.Drawing.Point(25, 35);
+            this.flickrAuthenticationGroupBox.Name = "flickrAuthenticationGroupBox";
+            this.flickrAuthenticationGroupBox.Size = new System.Drawing.Size(497, 109);
+            this.flickrAuthenticationGroupBox.TabIndex = 14;
+            this.flickrAuthenticationGroupBox.TabStop = false;
+            this.flickrAuthenticationGroupBox.Text = "Flick\'r authentication";
             // 
-            // useFlickrCheckbox
+            // label3
             // 
-            this.useFlickrCheckbox.AutoSize = true;
-            this.useFlickrCheckbox.Location = new System.Drawing.Point(44, 44);
-            this.useFlickrCheckbox.Name = "useFlickrCheckbox";
-            this.useFlickrCheckbox.Size = new System.Drawing.Size(73, 17);
-            this.useFlickrCheckbox.TabIndex = 10;
-            this.useFlickrCheckbox.Text = "use Flick\'r";
-            this.useFlickrCheckbox.UseVisualStyleBackColor = true;
-            this.useFlickrCheckbox.Click += new System.EventHandler(this.useFlickrCheckbox_Click_1);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "fill in verifier code";
             // 
-            // tabPage4
+            // txtVerifierCode
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.White;
-            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage4.Controls.Add(this.useFlickrCheckbox);
-            this.tabPage4.Controls.Add(this.textBoxPageSize);
-            this.tabPage4.Controls.Add(this.label7);
-            this.tabPage4.Controls.Add(this.textBoxSetUrl);
-            this.tabPage4.Controls.Add(this.textBoxUserId);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.label5);
-            this.tabPage4.ForeColor = System.Drawing.Color.Black;
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(550, 429);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Flick\'r";
+            this.txtVerifierCode.Location = new System.Drawing.Point(147, 50);
+            this.txtVerifierCode.Name = "txtVerifierCode";
+            this.txtVerifierCode.Size = new System.Drawing.Size(281, 20);
+            this.txtVerifierCode.TabIndex = 12;
+            this.txtVerifierCode.TextChanged += new System.EventHandler(this.txtVerifierCode_TextChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(14, 80);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(132, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "authentication step 2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(130, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "authentication step 1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ConfigurationForm
             // 
@@ -309,6 +380,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.flickrSettingsGroupbox.ResumeLayout(false);
+            this.flickrSettingsGroupbox.PerformLayout();
+            this.flickrAuthenticationGroupBox.ResumeLayout(false);
+            this.flickrAuthenticationGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -330,12 +405,18 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.CheckBox useFlickrCheckbox;
         private System.Windows.Forms.TextBox textBoxPageSize;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxSetUrl;
         private System.Windows.Forms.TextBox textBoxUserId;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox flickrSettingsGroupbox;
+        private System.Windows.Forms.GroupBox flickrAuthenticationGroupBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtVerifierCode;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox useFlickrCheckbox;
     }
 }

@@ -7,39 +7,39 @@ using System.Threading.Tasks;
 
 namespace MannusWallPaper
 {
-    internal class IsolatedStorageManager
+    public class IsolatedStorageManager
     {
         private const string OAUTHTOKENFILENAME = "OAuthToken.txt";
         private const string OAUTHTOKENSECRETFILENAME = "OAuthTokenSecret.txt";
+        private const string FLICKRISAUTHENTICATED = "Flickr.txt";
         private readonly string _oauthTokenFilePath;
         private readonly string _oauthTokenSecretFilePath;
+        private readonly string _flickrFilePath;
 
         public IsolatedStorageManager()
         {
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             _oauthTokenFilePath = Path.Combine(appDataPath, OAUTHTOKENFILENAME);
             _oauthTokenSecretFilePath = Path.Combine(appDataPath, OAUTHTOKENSECRETFILENAME);
+            _flickrFilePath = Path.Combine(appDataPath, FLICKRISAUTHENTICATED);
         }
 
-        internal void DeleteIsolatedStorage()
+        public void DeleteIsolatedStorage()
         {
             File.Delete(_oauthTokenFilePath);
             File.Delete(_oauthTokenSecretFilePath);
+            File.Delete(_flickrFilePath);
         }
 
         internal string OAuthToken
         {
             get
             {
-                if(!File.Exists(_oauthTokenFilePath))
-                {
-                    return null;
-                }
-                return File.ReadAllText(_oauthTokenFilePath);
+                return ReadFromTextFile(_oauthTokenFilePath);
             }
             set
             {
-                File.WriteAllText(_oauthTokenFilePath, value);
+                WriteToTextFile(_oauthTokenFilePath, value);
             }
         }
 
@@ -47,16 +47,25 @@ namespace MannusWallPaper
         {
             get
             {
-                if (!File.Exists(_oauthTokenSecretFilePath))
-                {
-                    return null;
-                }
-                return File.ReadAllText(_oauthTokenSecretFilePath);
+                return ReadFromTextFile(_oauthTokenSecretFilePath);
             }
             set
             {
-                File.WriteAllText(_oauthTokenSecretFilePath, value);
+                WriteToTextFile(_oauthTokenSecretFilePath, value);
             }
+        }
+        private string ReadFromTextFile(string file)
+        {
+            if (!File.Exists(file))
+            {
+                return null;
+            }
+            return File.ReadAllText(file);
+        }
+
+        private void WriteToTextFile(string file, string content)
+        {
+            File.WriteAllText(file, content);
         }
     }
 }
