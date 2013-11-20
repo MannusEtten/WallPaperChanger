@@ -87,6 +87,10 @@ namespace MannusWallPaper
         {
             var token = _isolatedStorage.OAuthToken;
             var secret = _isolatedStorage.OAuthTokenSecret;
+            if(token == null && secret == null)
+            {
+                return false;
+            }
             if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(secret))
             {
                 _flickr.OAuthAccessToken = token;

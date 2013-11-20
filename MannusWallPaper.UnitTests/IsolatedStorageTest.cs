@@ -17,8 +17,6 @@ namespace MannusWallPaper.UnitTests
         [TestMethod]
         public void TestMethod1()
         {
-            var isAuthenticated = _isolatedStorage.FlickrIsAuthenticated;
-            Assert.IsFalse(isAuthenticated);
         }
     }
 }

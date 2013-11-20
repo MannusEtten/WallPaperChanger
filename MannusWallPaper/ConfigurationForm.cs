@@ -23,11 +23,11 @@ namespace MannusWallPaper
         public ConfigurationForm()
         {
             InitializeComponent();
-            LoadData();
             _flickrManager = new FlickrManager();
-            _flickr = new Flickr();
+            _flickr = new Flickr("04b183e090d0f3eaaf84240f18a7dc2a", "5a1315102ff1e88f");
             _storageManager = new IsolatedStorageManager();
             _token = null;
+            LoadData();
         }
 
         private void LoadData()
@@ -211,6 +211,8 @@ namespace MannusWallPaper
                 _storageManager.OAuthTokenSecret = accessToken.TokenSecret;
                 _flickr.OAuthAccessToken = accessToken.Token;
                 _flickr.OAuthAccessTokenSecret = accessToken.TokenSecret;
+                flickrAuthenticationGroupBox.Enabled = false;
+                flickrSettingsGroupbox.Enabled = true;
         }
 
         private void txtVerifierCode_TextChanged(object sender, EventArgs e)
