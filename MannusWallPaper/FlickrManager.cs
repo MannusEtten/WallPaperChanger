@@ -61,25 +61,20 @@ namespace MannusWallPaper
         }
 
         private Photo GetRandomPhoto()
-        {
-
-            /*
-            var settings = new FlickrGalleries.Settings();
-
-            FlickrGalleries.Settings.apiKey = FlickrConfiguration.GetConfig().ApiKey;
-            FlickrGalleries.Settings.apiSharedSecret = FlickrConfiguration.GetConfig().ApiSharedSecret;
-            List<Photoset> set = new FlickrGalleries.Sets().GetPhotoSets();
+        {                
+            var userId = FlickrConfiguration.GetConfig().UserId;
+            var sets = _flickr.PhotosetsGetList(userId);
             Random random = new Random();
-            if (set != null)
+            if (sets.Count > 0)
             {
                 // nummer set
-                int r1 = random.Next(0, set.Count - 1);
-                var setphotos = new FlickrGalleries.Photos().GetPhotosBySet(set[r1].PhotosetId, string.Empty);
+                int r1 = random.Next(0, sets.Count - 1);
+                var setphotos  = sets[r1];
                 // nummer foto
-                int r2 = random.Next(0, setphotos.Count - 1);
-                return setphotos[r2];
+                int r2 = random.Next(0, setphotos.NumberOfPhotos - 1);
+                var photos = _flickr.PhotosetsGetPhotos(setphotos.PhotosetId);
+                return photos[r2];
             }
-             */
             return null;
         }
 
